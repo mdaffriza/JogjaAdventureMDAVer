@@ -130,11 +130,18 @@ public class TileManager {
         int playerTileY = gp.player.worldY / gp.tileSize;
         int tileCode = mapTileNum[playerTileX][playerTileY];
 
+        // Print the tile code only if the player visits a different tile
+        if (tileCode != previousTileCode) {
+            System.out.println("Tile code visited: " + tileCode);
+            previousTileCode = tileCode;
+        }
+
+        // Add the tile code to the set of visited tiles if not already present
         if (!tilesVisited.contains(tileCode)) {
             tilesVisited.add(tileCode);
-            System.out.println("Tile code visited: " + tileCode);
         }
     }
+
 
     // Check if a tile code is valid
     public boolean isTileVisitable(int tileCode) {
