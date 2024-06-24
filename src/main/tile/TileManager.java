@@ -123,7 +123,8 @@ public class TileManager {
         int playerTileY = gp.player.worldY / gp.tileSize;
         return mapTileNum[playerTileX][playerTileY];
     }
-
+    // Variable to store the previous tile code
+    private int previousTileCode = -1;
     // Method to update the set of visited tiles and print tile codes
     public void updateTilesVisited() {
         int playerTileX = gp.player.worldX / gp.tileSize;
