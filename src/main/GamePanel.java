@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable, GameControl {
     Thread gameThread;
     public Player player = new Player(this, keyHandler);
     private AudioPlayer backgroundMusic;
+    private GameProgressTracker tracker;
 
     private TileManager tileManager = new TileManager(this);
 
@@ -39,13 +40,19 @@ public class GamePanel extends JPanel implements Runnable, GameControl {
         return tileManager;
     }
 
-    public GamePanel(AudioPlayer backgroundMusic) {
+    public GamePanel(AudioPlayer backgroundMusic, GameProgressTracker tracker) {
         this.backgroundMusic = backgroundMusic;
+        this.tracker = tracker;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+    }
+
+    public void movePlayer(int newTileId) {
+        // Assuming newTileId is the ID of the tile the player is moving to
+        tracker.checkTile(newTileId);
     }
 
     @Override
@@ -155,5 +162,4 @@ public class GamePanel extends JPanel implements Runnable, GameControl {
     public void toggleMovementRestriction(boolean enable) {
         player.setRestrictMovement(enable);
     }
-
 }
